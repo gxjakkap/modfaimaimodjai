@@ -1,0 +1,16 @@
+services:
+  mongodb:
+    image: mongo:8
+    container_name: modfaimaimodjai-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-dev}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-devpassword}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE:-modfaimaimodjai}
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:

@@ -1,0 +1,40 @@
+services:
+  app:
+    image: ghcr.io/gxjakkap/modfaimaimodfai:main
+    pull_policy: always
+    container_name: modfaimaimodjai-app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      NODE_ENV: production
+      PORT: 8080
+      HOSTNAME: 0.0.0.0
+      NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+      TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY}
+      MONGODB_URI: ${MONGODB_URI}
+  mongodb:
+    image: mongo:8
+    container_name: modfaimaimodjai-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE:-modfaimaimodjai}
+    volumes:
+      - mongodb_data:/data/db
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel run --protocol http2
+    environment:
+      TUNNEL_TOKEN: ${CF_TUNNEL_TOKEN:?CF_TUNNEL_TOKEN is required}
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+volumes:
+  mongodb_data:
