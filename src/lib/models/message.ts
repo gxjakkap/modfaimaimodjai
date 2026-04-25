@@ -12,6 +12,7 @@ const messageSchema = new Schema<Message>(
 			type: String,
 			required: true,
 			trim: true,
+			unique: true,
 		},
 		message: {
 			type: String,

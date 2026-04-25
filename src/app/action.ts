@@ -26,6 +26,8 @@ async function verifyTurnstile(token: string, secret: string) {
 export const submitMessage = createServerAction()
 	.input(messageSchema)
 	.handler(async ({ input }) => {
+		const normalizedEmail = input.email.trim().toLowerCase()
+
 		const isValid = await verifyTurnstile(
 			input.turnstileToken,
 			process.env.TURNSTILE_SECRET_KEY || "",
@@ -37,11 +39,34 @@ export const submitMessage = createServerAction()
 
 		await connectToMongoDB()
 
-		const newMsg = await MessageModel.create({
-			email: input.email,
-			message: input.message,
-			timestamp: new Date(),
-		})
+		const existing = await MessageModel.exists({ email: normalizedEmail })
 
-		return { id: newMsg.id }
+		if (existing) {
+			throw new Error(
+				"มีข้อความส่งถึงอีเมลนี้แล้ว หากต้องการแก้ข้อความโปรดติดต่อ IG: modfaimaimodjai",
+			)
+		}
+
+		try {
+			const newMsg = await MessageModel.create({
+				email: normalizedEmail,
+				message: input.message,
+				timestamp: new Date(),
+			})
+
+			return { id: newMsg.id }
+		} catch (error) {
+			if (
+				typeof error === "object" &&
+				error !== null &&
+				"code" in error &&
+				error.code === 11000
+			) {
+				throw new Error(
+					"มีข้อความส่งถึงอีเมลนี้แล้ว หากต้องการแก้ข้อความโปรดติดต่อ IG: modfaimaimodjai",
+				)
+			}
+
+			throw error
+		}
 	})
