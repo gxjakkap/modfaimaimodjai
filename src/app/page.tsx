@@ -1,5 +1,6 @@
 import { Mali } from "next/font/google"
 import Image from "next/image"
+import { connection } from "next/server"
 import { cn } from "@/lib/utils"
 import { EmailFormCard } from "./_components/email-form-card"
 
@@ -7,7 +8,11 @@ const mali = Mali({
 	weight: "600",
 })
 
-export default function Home() {
+export default async function Home() {
+	await connection()
+
+	const turnstileSiteKey = process.env.TURNSTILE_SITE_KEY ?? ""
+
 	return (
 		<div className="flex min-h-dvh w-full flex-col px-4 py-8 sm:px-6 sm:py-12">
 			<main className="mx-auto flex max-w-screen w-full flex-1 flex-col items-center justify-center gap-6 sm:gap-8">
@@ -28,7 +33,7 @@ export default function Home() {
 					<span>อยากบอกอะไรกับตัวเอง</span>
 					<span>ในวันที่เหนื่อยล้า ?</span>
 				</div>
-				<EmailFormCard />
+				<EmailFormCard turnstileSiteKey={turnstileSiteKey} />
 			</main>
 			<footer className="mx-auto w-full max-w-3xl pt-4 sm:pt-6">
 				<Image

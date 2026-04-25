@@ -52,11 +52,15 @@ declare global {
 	}
 }
 
-export function EmailFormCard() {
+type EmailFormCardProps = {
+	turnstileSiteKey: string
+}
+
+export function EmailFormCard({ turnstileSiteKey }: EmailFormCardProps) {
 	const turnstileContainerRef = useRef<HTMLDivElement | null>(null)
 	const turnstileWidgetIdRef = useRef<string | null>(null)
 	const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
-	const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+	const siteKey = turnstileSiteKey
 	const isTurnstileConfigured = Boolean(siteKey)
 
 	const form = useForm<z.infer<typeof messageSchema>>({
