@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/gxjakkap/modfaimaimodfai:main
+    image: ghcr.io/gxjakkap/modfaimaimodjai:main
     pull_policy: always
     container_name: modfaimaimodjai-app
     restart: unless-stopped
