@@ -173,7 +173,7 @@ export function EmailFormCard({ turnstileSiteKey }: EmailFormCardProps) {
 												aria-invalid={
 													fieldState.invalid
 												}
-												placeholder="kon.geng@kmutt.ac.th"
+												placeholder="kon.geng@examplemail.com"
 												autoComplete="off"
 												className="lg:h-9 lg:text-base"
 											/>
