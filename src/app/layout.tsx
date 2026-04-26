@@ -1,13 +1,8 @@
 import type { Metadata } from "next"
-import { IBM_Plex_Sans, Noto_Sans } from "next/font/google"
+import { IBM_Plex_Sans } from "next/font/google"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
 import { cn } from "@/lib/utils"
-
-const notoSansHeading = Noto_Sans({
-	subsets: ["latin"],
-	variable: "--font-heading",
-})
 
 const ibmPlexSans = IBM_Plex_Sans({
 	subsets: ["latin"],
@@ -33,7 +28,6 @@ export default function RootLayout({
 				"antialiased",
 				"font-sans",
 				ibmPlexSans.variable,
-				notoSansHeading.variable,
 			)}
 		>
 			<body className="min-h-full flex flex-col">
