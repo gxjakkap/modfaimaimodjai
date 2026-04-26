@@ -5,7 +5,6 @@
 	"js/ts.tsdk.path": "node_modules/typescript/lib",
 	"js/ts.preferences.autoImportFileExcludePatterns": ["@base-ui/**"],
 	"editor.formatOnPaste": true,
-	"emmet.showExpandedAbbreviation": "never",
 	"[javascript]": {
 		"editor.defaultFormatter": "biomejs.biome"
 	},

@@ -16,23 +16,30 @@ export default async function Home() {
 	return (
 		<div className="flex min-h-dvh w-full flex-col px-4 py-8 sm:px-6 sm:py-12">
 			<main className="mx-auto flex max-w-screen w-full flex-1 flex-col items-center justify-center gap-6 sm:gap-8">
-				<h1
-					className={cn(
-						"text-center font-heading whitespace-nowrap text-[clamp(0.95rem,4vw,3rem)] leading-tight hidden md:block",
-						mali.className,
-					)}
-				>
-					อยากบอกอะไรกับตัวเองในวันที่เหนื่อยล้า ?
-				</h1>
-				<div
-					className={cn(
-						"text-center font-heading whitespace-nowrap text-3xl leading-tight flex flex-col gap-y-2 md:hidden",
-						mali.className,
-					)}
-				>
-					<span>อยากบอกอะไรกับตัวเอง</span>
-					<span>ในวันที่เหนื่อยล้า ?</span>
+				<div className="flex flex-col max-w-screen w-full items-center justify-center gap-y-3">
+					<h1
+						className={cn(
+							"text-center font-heading whitespace-nowrap text-[clamp(0.95rem,4vw,3rem)] leading-tight hidden md:block",
+							mali.className,
+						)}
+					>
+						อยากบอกอะไรกับตัวเองในวันที่เหนื่อยล้า ?
+					</h1>
+					<div
+						className={cn(
+							"text-center font-heading whitespace-nowrap text-3xl leading-tight flex flex-col gap-y-2 md:hidden",
+							mali.className,
+						)}
+					>
+						<span>อยากบอกอะไรกับตัวเอง</span>
+						<span>ในวันที่เหนื่อยล้า ?</span>
+					</div>
+					<p className="text-center text-base text-gray-600 md:text-lg leading-tight">
+						เพราะในบางครั้ง คนที่รู้ใจตัวเองและให้กำลังใจเราได้ดีที่สุด
+						คือคนที่อยู่ใกล้เรามากที่สุด
+					</p>
 				</div>
+
 				<EmailFormCard turnstileSiteKey={turnstileSiteKey} />
 			</main>
 			<footer className="mx-auto w-full max-w-3xl pt-4 sm:pt-6">
