@@ -165,7 +165,7 @@ export function EmailFormCard({ turnstileSiteKey }: EmailFormCardProps) {
 											data-invalid={fieldState.invalid}
 										>
 											<FieldLabel htmlFor="email-inp">
-												อีเมล
+												อีเมลของคุณ
 											</FieldLabel>
 											<Input
 												{...field}
@@ -201,7 +201,7 @@ export function EmailFormCard({ turnstileSiteKey }: EmailFormCardProps) {
 												aria-invalid={
 													fieldState.invalid
 												}
-												placeholder="สิ่งที่คุณอยากบอกตัวเอง..."
+												placeholder="สิ่งที่คุณอยากบอก..."
 												autoComplete="off"
 												className="lg:min-h-20 lg:text-base"
 											/>
@@ -269,7 +269,7 @@ export function EmailFormCard({ turnstileSiteKey }: EmailFormCardProps) {
 						<AlertDialogHeader>
 							<AlertDialogTitle>บันทึกกำลังใจสำเร็จ</AlertDialogTitle>
 							<AlertDialogDescription>
-								ข้อความของคุณถูกบันทึกแล้ว ขอบคุณที่แบ่งปันกำลังใจให้ตัวเอง 💖
+								ข้อความของคุณถูกบันทึกแล้ว ขอบคุณที่ร่วมแบ่งปันกำลังใจ 💖
 							</AlertDialogDescription>
 						</AlertDialogHeader>
 						<AlertDialogFooter>

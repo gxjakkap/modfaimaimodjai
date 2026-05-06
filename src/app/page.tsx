@@ -23,7 +23,7 @@ export default async function Home() {
 							mali.className,
 						)}
 					>
-						อยากบอกอะไรกับตัวเองในวันที่เหนื่อยล้า ?
+						Words of wonder
 					</h1>
 					<div
 						className={cn(
@@ -31,12 +31,11 @@ export default async function Home() {
 							mali.className,
 						)}
 					>
-						<span>อยากบอกอะไรกับตัวเอง</span>
-						<span>ในวันที่เหนื่อยล้า ?</span>
+						Words of wonder
 					</div>
 					<p className="text-center text-base text-gray-600 md:text-lg leading-tight">
 						เพราะในบางครั้ง คนที่รู้ใจตัวเองและให้กำลังใจเราได้ดีที่สุด
-						คือคนที่อยู่ใกล้เรามากที่สุด
+						อาจมาจากคนที่รู้สึกแบบเดียวกับเรา
 					</p>
 				</div>
 
