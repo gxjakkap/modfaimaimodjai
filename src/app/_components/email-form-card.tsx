@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { SendIcon } from "lucide-react"
 import Script from "next/script"
+import posthog from "posthog-js"
 import { useCallback, useRef, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { toast } from "sonner"
@@ -87,11 +88,15 @@ export function EmailFormCard({ turnstileSiteKey }: EmailFormCardProps) {
 	}, [form])
 
 	const { execute, isPending } = useServerAction(submitMessage, {
-		onSuccess: () => {
+		onSuccess: ({ data }) => {
+			posthog.capture("message_submitted", {
+				message_id: data?.id,
+			})
 			resetFormAfterSuccess()
 			setIsSuccessModalOpen(true)
 		},
 		onError: ({ err }) => {
+			posthog.capture("message_submit_failed")
 			toast.error(
 				typeof err.message === "string"
 					? err.message
@@ -133,7 +138,15 @@ export function EmailFormCard({ turnstileSiteKey }: EmailFormCardProps) {
 	}, [form, siteKey])
 
 	const handleSubmit = (data: z.infer<typeof messageSchema>) => {
+		posthog.capture("message_submit_clicked")
 		void execute(data)
+	}
+
+	const handleSuccessModalOpenChange = (open: boolean) => {
+		if (!open) {
+			posthog.capture("success_modal_dismissed")
+		}
+		setIsSuccessModalOpen(open)
 	}
 
 	return (
@@ -261,7 +274,7 @@ export function EmailFormCard({ turnstileSiteKey }: EmailFormCardProps) {
 
 			<AlertDialog
 				open={isSuccessModalOpen}
-				onOpenChange={setIsSuccessModalOpen}
+				onOpenChange={handleSuccessModalOpenChange}
 			>
 				<AlertDialogPortal>
 					<AlertDialogOverlay />
